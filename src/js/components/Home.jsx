@@ -36,6 +36,8 @@ const Home = () => {
             onKeyDown={handleKeyDown}
             onChange={handleOnChange}
             value={inputValue}
+			placeholder = "Enter your task here"
+			className="taskInput"
           />
         </li>
         {tasks.map((task) => (
