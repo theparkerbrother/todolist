@@ -3,7 +3,10 @@ import ReactDOM from 'react-dom/client'
 
 //Bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap"
+import "bootstrap";
+
+//fontawesome
+import "@fortawesome/fontawesome-free";
 
 // index.css'
 import '../styles/index.css'

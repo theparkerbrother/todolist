@@ -1,28 +1,54 @@
-import React from "react";
-
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
+import React, { useState } from "react";
+import Task from "./Task";
 
 //create your first component
 const Home = () => {
-	return (
-		<div className="text-center">
-            
+  const [inputValue, setInputValue] = useState("");
+  const [tasks, setTasks] = useState([]);
 
-			<h1 className="text-center mt-5">Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working...
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
-		</div>
-	);
+  const deleteTask = (taskId) => {
+    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" && inputValue.trim() !== "") {
+      const newTask = {
+        id: Date.now(),
+        description: inputValue, // Use inputValue for description
+      };
+
+      setTasks((prevTasks) => [...prevTasks, newTask]);
+      setInputValue("");
+    }
+  };
+
+  const handleOnChange = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  return (
+    <div className="container">
+      <h1 className="text-center mt-5 myHeader">My React To Do List</h1>
+      <ul className="list-group">
+        <li className="list-group-item">
+          <input
+            type="text"
+            onKeyDown={handleKeyDown}
+            onChange={handleOnChange}
+            value={inputValue}
+          />
+        </li>
+        {tasks.map((task) => (
+          <Task
+            key={task.id} // Use task.id as the key
+            id={task.id} // Pass the task's id
+            description={task.description} // Pass the task's description
+            onDelete={deleteTask} // Pass the delete function
+          />
+        ))}
+      </ul>
+    </div>
+  );
 };
 
 export default Home;

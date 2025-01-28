@@ -9,3 +9,16 @@
     import 'relative/path/to/stylesheet.scss';
 
 */
+
+.myHeader {
+    color: black;
+}
+
+.trashCan {
+    height: 20px;
+    visibility: hidden;
+}
+
+li:hover .trashCan {
+    visibility: visible;
+}
